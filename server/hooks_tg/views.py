@@ -16,8 +16,8 @@ def process_file(file_path):
     goods = pandas.read_excel(file_path)
     added_titles = []
     for good in goods.itertuples():
-        title = good['title']
-        good_rule = GoodRule(title=title, url=good['url'], xpath=good['xpath'])
+        title = good.title
+        good_rule = GoodRule(title=title, url=good.url, xpath=good.xpath)
         good_rule.save()
         added_titles.append(title)
     
