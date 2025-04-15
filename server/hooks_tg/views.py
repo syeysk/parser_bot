@@ -7,11 +7,21 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 
+from parser.models import GoodRule
+
 CALLBACK_DATA_LOADFILE = 'load_file'
 
 
-def process_file_and_parse(file_path):
-    pass
+def process_file(file_path):
+    goods = pandas.read_excel(file_path)
+    added_titles = []
+    for good in goods.itertuples():
+        title = good['title']
+        good_rule = GoodRule(title=title, url=good['url'], xpath=good['xpath'])
+        good_rule.save()
+        added_titles.append(title)
+    
+    return added_titles
 
 
 class HookBotView(APIView):
@@ -53,7 +63,13 @@ class HookBotView(APIView):
                 with open(file_local_path, 'wb') as file_local:
                     file_local.write(response.content)
                 
-                process_file_and_parse(file_local_path)
+                added_titles = process_file(file_local_path)
+                added_titles_str = ', '.join(added_titles)
+                params = {
+                    'chat_id': message['chat']['id'],
+                    'text': f'Следующие товары добавлены для парсинга:\n{added_titles_str}',
+                }
+                requests.post(f'{settings.TG_API_URL}/sendMessage', json=params)
 
         callback_query = request.data.get('callback_query')
         if callback_query and callback_query['data'] == CALLBACK_DATA_LOADFILE:
