@@ -53,7 +53,9 @@ server {
        root /usr/share/nginx/html/parser_bot/static;
     }
 }
+
+
 ```
 
 Если нужно установить сертификат SSL для домена, то [следуйте инструкциям](https://www.nginx.com/blog/using-free-ssltls-certificates-from-lets-encrypt-with-nginx/) - поправка: возможно, на Вашем сервере нужно вместо команды `python` использовать `python3`.
-Если Вы ранее выполняли команды из этой инструкции для других серверов Платформы, то достаточно выполнить команду `sudo certbot --nginx -d bot.syeysk.ru -d www.bot.syeysk.ru`, чтобы получить сертификат.
+Если Вы ранее выполняли команды из этой инструкции для других серверов, то достаточно выполнить команду `sudo certbot --nginx -d bot.syeysk.ru -d www.bot.syeysk.ru`, чтобы получить сертификат.
