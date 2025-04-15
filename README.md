@@ -6,12 +6,11 @@
 Скачайте репозиторий:
 
 ```sh
-git clone https://github.com/syeysk/parser_bot && cd parser_bot
+git clone https://github.com/syeysk/parser_bot && cd parser_bot/server
 ```
 
 Заполните переменные окружения, добавив и заполнив файл `.env`:
 ```sh
-cd server
 cp example_env .env
 cd ..
 ```
