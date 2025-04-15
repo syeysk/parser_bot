@@ -11,7 +11,9 @@ git clone https://github.com/syeysk/parser_bot && cd parser_bot
 
 Заполните переменные окружения, добавив и заполнив файл `.env`:
 ```sh
+cd server
 cp example_env .env
+cd ..
 ```
 
 Соберите образ и запустите контейнер:
@@ -22,7 +24,7 @@ docker-compose -f docker-compose.yml up -d --build
 
 ## Проверка доступности сервера
 
-<http://127.0.0.1:8003/admin>
+<http://127.0.0.1:8020/admin>
 
 ## Настройте Nginx + Debian для глобального доступа
 
@@ -37,7 +39,7 @@ server {
     server_name bot.syeysk.ru www.bot.syeysk.ru;
     root /usr/share/nginx/html/bot.syeysk.ru;
     location / {
-        proxy_pass http://127.0.0.1:8003;
+        proxy_pass http://127.0.0.1:8020;
     }
     location /static/ {
         sendfile on;

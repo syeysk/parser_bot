@@ -10,7 +10,7 @@ services:
        && python3 manage.py collectstatic --noinput
        && python3 manage.py runserver 0.0.0.0:8000"
     ports:
-      - "8003:8000"
+      - "8020:8000"
     volumes:
       - .:/app
-      - /usr/share/nginx/html/django-sy-notes/static:/static
+      - /usr/share/nginx/html/parser_bot/static:/static
