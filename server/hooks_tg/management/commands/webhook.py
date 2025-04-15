@@ -24,5 +24,6 @@ class Command(BaseCommand):
             response_json = response.json()
             if response_json['ok']:
                 self.stdout.write('Хук успешно установлен')
+                return
 
         self.stdout.write(f'Ошибка установки хука: {response.content}\n\n')
