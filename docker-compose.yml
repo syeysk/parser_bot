@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+
+  botparser:
+    build: .
+    container_name: 'botparser_container'
+    command: >
+       bash -c "python3 manage.py migrate
+       && python3 manage.py collectstatic --noinput
+       && python3 manage.py runserver 0.0.0.0:8000"
+    ports:
+      - "8003:8000"
+    volumes:
+      - .:/app
+      - /usr/share/nginx/html/django-sy-notes/static:/static
