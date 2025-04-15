@@ -20,6 +20,10 @@ env = environ.Env(DEBUG=(bool, True))
 environ.Env.read_env(env_file=BASE_DIR / '.env')
 
 TG_TOKEN = env.str('TG_TOKEN')
+TG_SECRET_TOKEN = env.str('TG_SECRET_TOKEN')
+TG_API_URL = f'https://api.telegram.org/bot{TG_TOKEN}'
+
+SITE_URL = env.str('SITE_URL')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -42,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'hooks_tg',
 ]
 
 MIDDLEWARE = [
